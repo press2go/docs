@@ -12,14 +12,14 @@ This implementation also supports multiple levels of documents. I call these _ar
 ### Sub-folders
 Apart from this, each area can store documents in sub-folders, for better overview.
 
-### Settings
+## Settings
 Settings for each area can se set in the `_settings.json` file.
 
     {"title": "Area 1", "index": "page1"}
 
 The title of this areas is `Area 1` and the default page to load as index is `page1.md` in the same directory.
 
-### Setup
+## Setup
 The setup process is easy. You should make a `settings.php` file in the root directory containing the following:
 
     define('DOC_PATH', '<THE FULL PATH TO THE DOCS AREA>');
