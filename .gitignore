@@ -1,0 +1,4 @@
+/vendor
+/settings.php
+/composer.lock
+!/public/.htaccess
