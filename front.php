@@ -69,7 +69,7 @@ $app->get('/:area/:path+', function($area, $path) use ($app) {
 
     // Clean the path
     $orig_path = realpath($doc_dir . implode('/', $path));
-    if (empty($orig_path) || strpos($orig_path, $doc_dir) === false) {
+    if (empty($orig_path) || strpos($orig_path, DOC_PATH) === false) {
         $app->notFound();
     }
 
