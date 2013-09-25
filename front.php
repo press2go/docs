@@ -68,6 +68,11 @@ $app->get('/:area/:path+', function($area, $path) use ($app) {
     }
 
     // Clean the path
+    $orig_path = realpath($doc_dir . implode('/', $path));
+    if (empty($orig_path) || strpos($orig_path, $doc_dir) === false) {
+        $app->notFound();
+    }
+
     foreach ($path as $i => &$t) {
         $t = str_replace('.', '', $t);
         if (empty($t)) {
@@ -91,7 +96,17 @@ $app->get('/:area/:path+', function($area, $path) use ($app) {
     try {
         $content = $page->getContent();
     } catch (\Content\NotFoundException $e) {
-        $app->notFound();
+        if (!file_exists($orig_path)) {
+            $app->notFound();
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $orig_path);
+        finfo_close($finfo);
+
+        header("Content-type: $mime_type");
+        readfile($orig_path);
+        exit;
     }
 
     $app->render('page.phtml', array(
