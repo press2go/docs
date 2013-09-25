@@ -69,10 +69,6 @@ $app->get('/:area/:path+', function($area, $path) use ($app) {
 
     // Clean the path
     $orig_path = realpath($doc_dir . implode('/', $path));
-    if (empty($orig_path) || strpos($orig_path, DOC_PATH) === false) {
-        $app->notFound();
-    }
-
     foreach ($path as $i => &$t) {
         $t = str_replace('.', '', $t);
         if (empty($t)) {
@@ -97,6 +93,10 @@ $app->get('/:area/:path+', function($area, $path) use ($app) {
         $content = $page->getContent();
     } catch (\Content\NotFoundException $e) {
         if (!file_exists($orig_path)) {
+            $app->notFound();
+        }
+
+        if (empty($orig_path) || strpos($orig_path, DOC_PATH) === false) {
             $app->notFound();
         }
 
