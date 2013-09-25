@@ -387,18 +387,9 @@ header {
   width: 840px;
 }
 
-a {
-  color: #349dc7;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #92a6ad;
-}
-
-a:hover {
+a, a:visited, a:hover {
   text-decoration: underline;
-  color: #66d0fa;
+  color: #349dc7;
 }
 
 .sidebar>ul {
